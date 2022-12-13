@@ -1,8 +1,29 @@
-import React from 'react';
+
+import * as React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+
+  const [act, setAct] = React.useState(null);
+
+  React.useEffect(() => {
+
+
+
+      fetch('http://localhost:7048/api/Activities').then( (res) => res.json()).then((response) => {
+
+        setAct(response);
+      })
+
+
+  },[])
+
+
+  React.useEffect(() => {
+
+    console.log({act})
+  }, [act])
   return (
     <div className="App">
       <header className="App-header">

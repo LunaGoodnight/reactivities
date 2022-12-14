@@ -11,7 +11,7 @@ function App() {
 
 
 
-      fetch('http://localhost:5000/api/Activities').then( (res) => res.json()).then((response) => {
+      fetch('https://localhost:44339/api/Activities').then( (res) => res.json()).then((response) => {
 
         setAct(response);
       })

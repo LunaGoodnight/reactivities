@@ -1,3 +1,5 @@
+using Application.Activities;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +24,9 @@ builder.Services.AddCors(opt =>
     opt.AddPolicy("CorsPolicy",
         policy => { policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000"); });
 });
+
+builder.Services.AddMediatR(typeof(List.Handler));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

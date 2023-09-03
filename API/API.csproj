@@ -53,8 +53,4 @@
     <Content Remove="wwwroot\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DTOs" />
-  </ItemGroup>
-
 </Project>

@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using System.IdentityModel.Tokens.Jwt;
+using Domain;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
@@ -15,9 +16,18 @@ public class TokenService
             new Claim(ClaimTypes.NameIdentifier, user.Id),
             new Claim(ClaimTypes.Email, user.Email),
         };
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("super secret key"));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("zP41soTHm13wwSjH3YF5hn0DEnY4FRo13gXej63gH0gThMa9Htvq1vSoj0beFIgi"));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-        
-        return String.Empty;
+        var tokenDescriptor = new SecurityTokenDescriptor()
+        {
+            Subject = new ClaimsIdentity(claims),
+            Expires = DateTime.UtcNow.AddDays(7),
+            SigningCredentials = creds,
+        };
+
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+
+        return tokenHandler.WriteToken(token);
     }
 }

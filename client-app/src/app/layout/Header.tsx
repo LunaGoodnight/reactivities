@@ -12,6 +12,7 @@ const HeaderWrapper = styled.div`
 `;
 const InnerFlexBox = styled.div`
   width: 80%;
+  max-width: 1400px;
   display: flex;
   align-items: center;
   justify-content: space-between;

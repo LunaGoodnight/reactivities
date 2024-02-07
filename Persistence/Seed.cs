@@ -122,7 +122,15 @@ namespace Persistence
                     Venue = "Cinema",
                 }
             };
-
+            if (!context.MangaLinks.Any())
+            {
+                var mangaLinks = new List<Link>()
+                {
+                    new Link() { Domain = "https://www.yahoo.com", Title = "Yahoo" },
+                };
+                await context.MangaLinks.AddRangeAsync(mangaLinks);
+            }
+      
             await context.Activities.AddRangeAsync(activities);
             await context.SaveChangesAsync();
         }

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import { Activity } from "../../../app/models/activity";
 import {ActivityForm} from "../form/ActivityForm";
@@ -37,7 +37,21 @@ const TopWrap = styled.div`
   gap: 2%;
 display: flex;  padding-top: 2rem;
 `
-export const ActivityDashboard = ({ activities }: Props) => {
+export const ActivityDashboard = () => {
+
+  const [activities, setActivities] = useState<Activity[]>([]);
+  const [selectedActivity, setSelectedActivity] = useState<
+      Activity | undefined
+  >(undefined);
+
+  const apiUrl = `${process.env.REACT_APP_API_URL}/Activities`;
+  useEffect(() => {
+    fetch(apiUrl)
+        .then((res) => res.json())
+        .then((response) => {
+          setActivities(response);
+        });
+  }, []);
   return (
     <div>
       <WidthWrapper>

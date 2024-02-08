@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import styled from "styled-components";
 import Logo from "./../images/logo.webp";
 
@@ -35,11 +36,11 @@ export const Header = () => {
     <HeaderWrapper>
       <InnerFlexBox>
         <LogoStyle>
-          <img src={Logo} alt="logo" />
+          <Link to={`/`}>  <img src={Logo} alt="logo" /></Link>
+
         </LogoStyle>
         <NavList>
-          <li>吸貓(開發中)</li>
-          <li>美食(開發中)</li>
+          <Link to={`manga`}>Manga</Link>
         </NavList>
       </InnerFlexBox>
     </HeaderWrapper>

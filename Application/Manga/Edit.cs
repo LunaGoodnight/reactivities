@@ -1,44 +1,36 @@
 ﻿using Application.Core;
+using AutoMapper;
 using Domain;
-using FluentValidation;
 using MediatR;
 using Persistence;
 
 namespace Application.Manga;
 
-public class Create
+public class Edit
 {
     public class Command : IRequest<Result<Unit>>
     {
         public Link Link { get; set; }
     }
-    
-    public class CommandValidator : AbstractValidator<Command>
-    {
-        public CommandValidator()
-        {
-            RuleFor(x => x.Link).SetValidator(new MangaValidator());
-        }
-    }
 
     public class Handler : IRequestHandler<Command, Result<Unit>>
     {
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
 
-        public Handler(DataContext context)
+        public Handler(DataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
         {
-            _context.MangaLinks.Add(request.Link);
+            var manga = await _context.MangaLinks.FindAsync(request.Link.Id);
+            if (manga == null) return null;
+            _mapper.Map(request.Link, manga);
             var result = await _context.SaveChangesAsync() > 0;
-            if (!result)
-            {
-                return Result<Unit>.Failure("Failed to create manga");
-            }
-
+            if (!result) return Result<Unit>.Failure("Failed to update activity");
             return Result<Unit>.Success(Unit.Value);
         }
     }

@@ -14,5 +14,10 @@ public class MangaController : BaseApiController
     }
 
 
+    [HttpPost]
+    public async Task<IActionResult> CreateActivity(Link link)
+    {
+        return HandleResult(await Mediator.Send(new Create.Command { Link = link }));
+    }
 
 }

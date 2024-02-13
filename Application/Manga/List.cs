@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using Application.Core;
+using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -7,8 +8,8 @@ namespace Application.Manga;
 
 public class List
 {
-    public class Query : IRequest<List<Link>> { }
-    public class Handler : IRequestHandler<Query, List<Link>>
+    public class Query : IRequest<Result<List<Link>>> { }
+    public class Handler : IRequestHandler<Query, Result<List<Link>>>
     {
         private readonly DataContext _context;
 
@@ -16,9 +17,10 @@ public class List
         {
             _context = context;
         }
-        public async Task<List<Link>> Handle(Query request, CancellationToken cancellationToken)
+        public async Task<Result<List<Link>>> Handle(Query request, CancellationToken cancellationToken)
         {
-            return await _context.MangaLinks.ToListAsync();
+            
+            return Result<List<Link>>.Success(await _context.MangaLinks.ToListAsync());
         }
     }
 }

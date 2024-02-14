@@ -72,7 +72,10 @@ export const MangaItem = ({ title, domain, id }: IProps) => {
       domain: newDomain,
     }
 
-    EditManga(data);
+    EditManga(data).then(() => {
+
+      setIsEdit(false);
+    });
   };
   return (
     <MangaRow>

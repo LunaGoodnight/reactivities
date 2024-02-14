@@ -27,6 +27,7 @@ public class Edit
         public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
         {
             var manga = await _context.MangaLinks.FindAsync(request.Link.Id);
+            
             if (manga == null) return null;
             _mapper.Map(request.Link, manga);
             var result = await _context.SaveChangesAsync() > 0;

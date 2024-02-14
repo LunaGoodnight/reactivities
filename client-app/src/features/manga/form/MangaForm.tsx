@@ -5,7 +5,7 @@ import {v4 as uuid} from "uuid";
 
 export const MaterialInput = styled.input`
   width: 100%;
-  padding: 1rem;
+  padding: 2rem;
   outline: none;
   color: black;
   border: 0 solid #9d9d9d;
@@ -23,9 +23,14 @@ export const MaterialInput = styled.input`
   }
 `;
 
-
-const Wrap = styled.div`
-width: 100%;
+const Button = styled.button`
+  padding: 1rem;
+  background: #26a69a;
+  color: #fff;
+  cursor: pointer;
+  &:hover{
+    background: #229e93;
+  }
 `
 
 export const MangaForm = () => {
@@ -70,7 +75,7 @@ export const MangaForm = () => {
                   onChange={(e) => setDomain(e.target.value)}
               />
 
-              <button type='button' onClick={handleSubmit}>Submit</button>
+              <Button type='button' onClick={handleSubmit}>Submit</Button>
           </>
 
 

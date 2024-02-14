@@ -30,7 +30,7 @@ public class Edit
             if (manga == null) return null;
             _mapper.Map(request.Link, manga);
             var result = await _context.SaveChangesAsync() > 0;
-            if (!result) return Result<Unit>.Failure("Failed to update activity");
+            if (!result) return Result<Unit>.Failure("Failed to update manga link");
             return Result<Unit>.Success(Unit.Value);
         }
     }

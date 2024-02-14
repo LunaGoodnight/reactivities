@@ -15,19 +15,18 @@ const InnerFlexBox = styled.div`
   margin: 0 auto;
 `;
 export const MangaDashboard = () => {
-  const [mangaList, setMangaList] = useState<MangaLink[]>([]);
   const {data} = useGetMangaListQuery();
 
   return (
     <InnerFlexBox>
       <MangaForm />
-      {data && data.map(({ id, domain, title }) => {
+      {data ? data.map(({ id, domain, title }) => {
         return (
           <div key={id}>
-            <a href={domain}>{title}</a>
+            <a href={domain} target='_blank'>{title}</a>
           </div>
         );
-      })}
+      }) : null}
     </InnerFlexBox>
   );
 };

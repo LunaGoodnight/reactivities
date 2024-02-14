@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import {v4 as uuid} from "uuid";
+import {useAddMangaMutation} from "../../../services/manga";
 
 
 export const MaterialInput = styled.input`
@@ -36,28 +37,15 @@ const Button = styled.button`
 export const MangaForm = () => {
   const [domain, setDomain] = useState("");
   const [title, setTitle] = useState("");
-
-  const handleSubmit = async () => {
-      const apiUrl = `${process.env.REACT_APP_API_URL}/Manga`;
+  const [addManga] = useAddMangaMutation();
+  const handleSubmit = () => {
       const data = {
           id: uuid(),
           title,
           domain,
       };
 
-      try {
-          const response = await fetch(apiUrl, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(data),
-          });
-          if (response) {
-              const final = response.json();
-              console.log({ final });
-          }
-      } catch (e) {
-          console.log({ e });
-      }
+      addManga(data);
   }
   return (
 

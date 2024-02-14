@@ -16,15 +16,7 @@ const InnerFlexBox = styled.div`
 `;
 export const MangaDashboard = () => {
   const [mangaList, setMangaList] = useState<MangaLink[]>([]);
-  const {data} = useGetMangaListQuery('');
-  // const apiUrl = `${process.env.REACT_APP_API_URL}/Manga`;
-  // useEffect(() => {
-  //   fetch(apiUrl)
-  //     .then((res) => res.json())
-  //     .then((response) => {
-  //       setMangaList(response);
-  //     });
-  // }, []);
+  const {data} = useGetMangaListQuery();
 
   return (
     <InnerFlexBox>

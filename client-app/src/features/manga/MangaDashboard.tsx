@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import {  MangaLink } from "../../app/models/activity";
+import {useGetMangaListQuery} from "../../services/manga";
 import { MangaForm } from "./form/MangaForm";
 
 const InnerFlexBox = styled.div`
@@ -15,20 +16,20 @@ const InnerFlexBox = styled.div`
 `;
 export const MangaDashboard = () => {
   const [mangaList, setMangaList] = useState<MangaLink[]>([]);
-
-  const apiUrl = `${process.env.REACT_APP_API_URL}/Manga`;
-  useEffect(() => {
-    fetch(apiUrl)
-      .then((res) => res.json())
-      .then((response) => {
-        setMangaList(response);
-      });
-  }, []);
+  const {data} = useGetMangaListQuery('');
+  // const apiUrl = `${process.env.REACT_APP_API_URL}/Manga`;
+  // useEffect(() => {
+  //   fetch(apiUrl)
+  //     .then((res) => res.json())
+  //     .then((response) => {
+  //       setMangaList(response);
+  //     });
+  // }, []);
 
   return (
     <InnerFlexBox>
       <MangaForm />
-      {mangaList.map(({ id, domain, title }) => {
+      {data && data.map(({ id, domain, title }) => {
         return (
           <div key={id}>
             <a href={domain}>{title}</a>

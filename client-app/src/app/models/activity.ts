@@ -7,3 +7,9 @@ export interface Activity {
   venue: string
   description: string
 }
+export interface MangaLink {
+  id: string
+  title: string
+  domain: string
+
+}

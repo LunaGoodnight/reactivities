@@ -14,10 +14,10 @@ public class MangaController : BaseApiController
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> EditManga(Guid id,Link Link)
+    public async Task<IActionResult> EditManga(Guid id,Link link)
     {
-        Link.Id = id;
-        return HandleResult(await Mediator.Send(new Edit.Command { Link = Link }));
+        link.Id = id;
+        return HandleResult(await Mediator.Send(new Edit.Command { Link = link }));
     }
 
 

@@ -26,7 +26,7 @@ export const mangaApi = createApi({
             query: (body) => ({
                 url: `manga/${body.id}`,
                 method: 'PUT',
-                body: { title: body.title, domain: body.domain},
+                body: body,
             }),
             invalidatesTags: ['Manga'],
         }),

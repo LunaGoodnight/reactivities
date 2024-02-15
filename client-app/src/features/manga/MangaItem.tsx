@@ -50,8 +50,21 @@ const EditForm = styled.div`
   justify-content: space-between;
 `;
 
+const ButtonRow = styled.div`
+  display: flex;
+
+  gap: 1rem;
+`
+
+const DeleteButton = styled.button`
+
+  background: #b2b2b2;
+  color: #fff;
+  padding: 1rem;
+  cursor: pointer;
+`
 const SubmitButton = styled.button`
-  background: #5fb6ae;
+  background: #7acba7;
   color: #fff;
   padding: 1rem;
   cursor: pointer;
@@ -86,6 +99,7 @@ export const MangaItem = ({ title, domain, id }: IProps) => {
             {title}
           </a>
         </LeftLink>
+
         <Edit type='button' onClick={() => setIsEdit((prev) => !prev)}>Edit</Edit>
       </Top>
       {isEdit ? (
@@ -104,8 +118,11 @@ export const MangaItem = ({ title, domain, id }: IProps) => {
               onChange={(e) => setNewDomain(e.target.value)}
             />
           </div>
+          <ButtonRow>
+            <DeleteButton type='button'> Delete</DeleteButton>
+            <SubmitButton onClick={handleEdit}>Done</SubmitButton>
+          </ButtonRow>
 
-          <SubmitButton onClick={handleEdit}>Send</SubmitButton>
         </EditForm>
       ) : null}
     </MangaRow>

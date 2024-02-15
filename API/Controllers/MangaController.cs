@@ -27,4 +27,10 @@ public class MangaController : BaseApiController
         return HandleResult(await Mediator.Send(new Create.Command { Link = link }));
     }
 
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteManga(Guid id)
+    {
+        return HandleResult(await Mediator.Send(new Delete.Command { Id = id }));
+    }
+
 }

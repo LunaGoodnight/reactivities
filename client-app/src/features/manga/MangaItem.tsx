@@ -46,11 +46,10 @@ const Edit = styled.button`
 
 const EditForm = styled.div`
   width: 100%;
-  padding: 1rem;
-
   display: flex;
 
   justify-content: space-between;
+  padding: 1rem 0;
 `;
 
 const ButtonRow = styled.div`

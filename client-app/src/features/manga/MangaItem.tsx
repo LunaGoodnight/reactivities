@@ -1,6 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
-import {useEditMangaMutation} from "../../services/manga";
+import {
+  useDeleteMangaMutation,
+  useEditMangaMutation,
+} from "../../services/manga";
 import { MaterialInput } from "./form/MangaForm";
 
 const MangaRow = styled.li`
@@ -54,39 +57,39 @@ const ButtonRow = styled.div`
   display: flex;
 
   gap: 1rem;
-`
+`;
 
 const DeleteButton = styled.button`
-
   background: #b2b2b2;
   color: #fff;
   padding: 1rem;
   cursor: pointer;
-`
+`;
 const SubmitButton = styled.button`
   background: #7acba7;
   color: #fff;
   padding: 1rem;
   cursor: pointer;
-`
+`;
 export const MangaItem = ({ title, domain, id }: IProps) => {
   const [isEdit, setIsEdit] = useState(false);
   const [newDomain, setNewDomain] = useState(domain);
   const [newTitle, setNewTitle] = useState(title);
 
-  const [EditManga] = useEditMangaMutation()
+  const [EditManga] = useEditMangaMutation();
+  const [DeleteManga] = useDeleteMangaMutation();
+
+  const handleDelete = () => {
+    DeleteManga(id);
+  };
   const handleEdit = () => {
-
-
     const data = {
-
       id,
       title: newTitle,
       domain: newDomain,
-    }
+    };
 
     EditManga(data).then(() => {
-
       setIsEdit(false);
     });
   };
@@ -94,13 +97,14 @@ export const MangaItem = ({ title, domain, id }: IProps) => {
     <MangaRow>
       <Top>
         <LeftLink>
-
           <a href={domain} target="_blank">
             {title}
           </a>
         </LeftLink>
 
-        <Edit type='button' onClick={() => setIsEdit((prev) => !prev)}>Edit</Edit>
+        <Edit type="button" onClick={() => setIsEdit((prev) => !prev)}>
+          Edit
+        </Edit>
       </Top>
       {isEdit ? (
         <EditForm>
@@ -119,10 +123,13 @@ export const MangaItem = ({ title, domain, id }: IProps) => {
             />
           </div>
           <ButtonRow>
-            <DeleteButton type='button'> Delete</DeleteButton>
-            <SubmitButton onClick={handleEdit}>Done</SubmitButton>
+            <DeleteButton type="button" onClick={handleDelete}>
+              Delete
+            </DeleteButton>
+            <SubmitButton type="button" onClick={handleEdit}>
+              Done
+            </SubmitButton>
           </ButtonRow>
-
         </EditForm>
       ) : null}
     </MangaRow>

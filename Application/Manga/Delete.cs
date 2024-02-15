@@ -23,7 +23,7 @@ public class Delete
         
         public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
         {
-            var manga = await _context.Activities.FindAsync(request.Id);
+            var manga = await _context.MangaLinks.FindAsync(request.Id);
             if (manga == null) return null;
             _context.Remove(manga);
             var result = await _context.SaveChangesAsync() > 0;

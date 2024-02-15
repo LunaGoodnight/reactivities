@@ -22,11 +22,22 @@ export const mangaApi = createApi({
             }),
             invalidatesTags: ['Manga'],
         }),
-        editManga: builder.mutation<MangaLink, Partial<MangaLink> & Pick<MangaLink, 'id'>>({
+        editManga: builder.mutation({
             query: (body) => ({
                 url: `manga/${body.id}`,
                 method: 'PUT',
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
                 body: body,
+            }),
+            invalidatesTags: ['Manga'],
+        }),
+
+        deleteManga: builder.mutation({
+            query: (id) => ({
+                url: `manga/${id}`,
+                method: 'DELETE',
             }),
             invalidatesTags: ['Manga'],
         }),
@@ -35,4 +46,4 @@ export const mangaApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetMangaListQuery, useAddMangaMutation, useEditMangaMutation } = mangaApi
+export const { useGetMangaListQuery, useAddMangaMutation, useEditMangaMutation, useDeleteMangaMutation } = mangaApi

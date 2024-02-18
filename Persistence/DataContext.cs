@@ -16,4 +16,5 @@ public class DataContext : IdentityDbContext<AppUser>
 
     public DbSet<Activity> Activities { get; set; }
     public DbSet<Link> MangaLinks { get; set; }
+    public DbSet<Item> Items { get; set; }
 }

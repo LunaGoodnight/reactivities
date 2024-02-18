@@ -9,5 +9,6 @@ public class MappingProfiles : Profile
     {
         CreateMap<Activity, Activity>();
         CreateMap<Link, Link>();
+        CreateMap<Item, Item>();
     }
 }

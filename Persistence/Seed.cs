@@ -130,7 +130,15 @@ namespace Persistence
                 };
                 await context.MangaLinks.AddRangeAsync(mangaLinks);
             }
-      
+            if (!context.Items.Any())
+            {
+                var itemList = new List<Item>()
+                {
+                    new Item() { Name = "Test1", Description = "Dummy Data"},
+                };
+                await context.Items.AddRangeAsync(itemList);
+            }
+
             await context.Activities.AddRangeAsync(activities);
             await context.SaveChangesAsync();
         }

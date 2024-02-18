@@ -21,7 +21,7 @@ public static class ApplicationServiceExtensions
         services.AddCors(opt =>
         {
             opt.AddPolicy("CorsPolicy",
-                policy => { policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000", "https://www.pinkjelly.org/"); });
+                policy => { policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000", "https://www.pinkjelly.org/",  "https://luna.pinkjelly.org/"); });
         });
         services.AddMediatR(typeof(List.Handler));
         services.AddAutoMapper(typeof(MappingProfiles).Assembly);

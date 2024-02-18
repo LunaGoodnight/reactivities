@@ -11,5 +11,9 @@ export interface MangaLink {
   id: string
   title: string
   domain: string
-
+}
+export interface Item {
+  id: string
+  name: string
+  description: string
 }

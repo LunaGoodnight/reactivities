@@ -37,10 +37,14 @@ export const Header = () => {
       <InnerFlexBox>
         <LogoStyle>
           <Link to={`/`}>  <img src={Logo} alt="logo" /></Link>
-
         </LogoStyle>
         <NavList>
-          <Link to={`manga`}>Manga</Link>
+          <li>
+            <Link to={`manga`}>Manga</Link>
+          </li>
+          <li>
+            <Link to={`anything`}>Anything</Link>
+          </li>
         </NavList>
       </InnerFlexBox>
     </HeaderWrapper>

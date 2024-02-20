@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ActivityDashboard } from "./features/activities/dashboard/ActivityDashboard";
+import {AnythingDashboard} from "./features/anything/AnythingDashboard";
 import { MangaDashboard } from "./features/manga/MangaDashboard";
 import { Provider } from "react-redux";
 import GlobalStyle from "./globalStyle";
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <ActivityDashboard />,
+      },
+      {
+        path: "/anything",
+        element: <AnythingDashboard />,
       },
       {
         path: "/manga",

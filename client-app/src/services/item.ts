@@ -1,6 +1,6 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import {Item} from "../app/models/activity";
+import {ItemInterface} from "../app/models/activity";
 
 
 
@@ -10,13 +10,13 @@ export const itemApi = createApi({
     tagTypes: ['Item'],
     baseQuery: fetchBaseQuery({ baseUrl: `${process.env.REACT_APP_API_URL}/` }),
     endpoints: (builder) => ({
-        getItemList: builder.query<Item[], void>({
-            query: () => `item`,
+        getItemList: builder.query<ItemInterface[], void>({
+            query: () => `items`,
             providesTags: ['Item'],
         }),
-        addManga: builder.mutation<Item, Partial<Item>>({
+        addItem: builder.mutation<ItemInterface, Partial<ItemInterface>>({
             query: (body) => ({
-                url: `item`,
+                url: `items`,
                 method: 'POST',
                 body,
             }),
@@ -24,7 +24,7 @@ export const itemApi = createApi({
         }),
         editItem: builder.mutation({
             query: (body) => ({
-                url: `item/${body.id}`,
+                url: `items/${body.id}`,
                 method: 'PUT',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
@@ -36,7 +36,7 @@ export const itemApi = createApi({
 
         deleteItem: builder.mutation({
             query: (id) => ({
-                url: `item/${id}`,
+                url: `items/${id}`,
                 method: 'DELETE',
             }),
             invalidatesTags: ['Item'],
@@ -46,4 +46,4 @@ export const itemApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const {  } = itemApi
+export const {  useGetItemListQuery, useAddItemMutation, useEditItemMutation, useDeleteItemMutation } = itemApi

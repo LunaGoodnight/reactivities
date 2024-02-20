@@ -12,7 +12,7 @@ export interface MangaLink {
   title: string
   domain: string
 }
-export interface Item {
+export interface ItemInterface {
   id: string
   name: string
   description: string

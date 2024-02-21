@@ -22,6 +22,12 @@ export const ModalBox = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 9px;
+  
+  display: flex;
+  
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 
 export const BiggerModalBox = styled(ModalBox)`

@@ -1,7 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { ItemInterface } from "../../app/models/activity";
-import { useEditItemMutation } from "../../services/item";
+import {
+  useDeleteItemMutation,
+  useEditItemMutation,
+} from "../../services/item";
 import { Input } from "./AnythingDashboard";
 
 const WrapRow = styled.div`
@@ -34,16 +37,27 @@ const SubmitButton = styled(Button)`
   background: pink;
 `;
 
+const EditButton = styled(Button)`
+  background: #abdadf;
+  color: #4c4c4c;
+`;
+const DeleteButton = styled(Button)`
+  background: #cbcbcb;
+  color: #585858;
+`;
 const ButtonRow = styled.div`
   display: flex;
   gap: 1rem;
-`
+`;
+
+
 export const Item = ({ id, name, description }: ItemInterface) => {
   const [isEdit, setIsEdit] = useState(false);
   const [newName, setNewName] = useState(name);
   const [newDescription, setNewDescription] = useState(description);
 
   const [editItem, { isLoading, isSuccess }] = useEditItemMutation();
+  const [deleteItem] = useDeleteItemMutation();
   return (
     <WrapRow key={id}>
       {isEdit ? (
@@ -76,8 +90,12 @@ export const Item = ({ id, name, description }: ItemInterface) => {
             <SubmitButton
               type="button"
               onClick={() => {
-                editItem({ id, name: newName, description: newDescription }).then(() => {
-                    setIsEdit(false)
+                editItem({
+                  id,
+                  name: newName,
+                  description: newDescription,
+                }).then(() => {
+                  setIsEdit(false);
                 });
               }}
             >
@@ -85,9 +103,19 @@ export const Item = ({ id, name, description }: ItemInterface) => {
             </SubmitButton>
           </ButtonRow>
         ) : (
-          <Button type="button" onClick={() => setIsEdit(true)}>
-            Edit
-          </Button>
+          <ButtonRow>
+            <DeleteButton
+              type="button"
+              onClick={() => {
+                deleteItem(id);
+              }}
+            >
+              Delete
+            </DeleteButton>
+            <EditButton type="button" onClick={() => setIsEdit(true)}>
+              Edit
+            </EditButton>
+          </ButtonRow>
         )}
       </div>
     </WrapRow>

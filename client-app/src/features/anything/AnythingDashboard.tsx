@@ -17,6 +17,7 @@ const Button = styled.button`
   background: #3eb8b8;
   border-radius: 8px;
   padding: 1rem;
+  cursor: pointer;
 `;
 
 const CloseButton = styled.div`
@@ -47,14 +48,13 @@ const WrapForm = styled.div`
   flex-direction: column;
 
   width: 80%;
-
-  gap: 1rem;
+  gap: 1.5rem;
 `;
 
 const FormTitle = styled.div`
   font-size: 2rem;
   font-weight: bold;
-  padding-bottom: 3rem;
+  padding-bottom: 2rem;
 `;
 export const AnythingDashboard = () => {
   const { data } = useGetItemListQuery();
@@ -92,7 +92,7 @@ export const AnythingDashboard = () => {
                     onChange={(e) => setDescription(e.target.value)}
                   />
 
-                  <button
+                  <Button
                     type="button"
                     onClick={() => {
                       if (name !== "" && description !== "") {
@@ -102,12 +102,14 @@ export const AnythingDashboard = () => {
                           description,
                         }).then(() => {
                           setIsModalOpen(false);
+                          setName("");
+                          setDescription("");
                         });
                       }
                     }}
                   >
                     Submit
-                  </button>
+                  </Button>
                 </WrapForm>
               )}
             </ModalBox>

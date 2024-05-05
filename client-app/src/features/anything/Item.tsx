@@ -50,7 +50,6 @@ const ButtonRow = styled.div`
   gap: 1rem;
 `;
 
-
 export const Item = ({ id, name, description }: ItemInterface) => {
   const [isEdit, setIsEdit] = useState(false);
   const [newName, setNewName] = useState(name);

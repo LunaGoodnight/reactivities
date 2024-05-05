@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useGetMangaListQuery } from "../../services/manga";
 import { MangaForm } from "./form/MangaForm";
-import {MangaItem} from "./MangaItem";
+import { MangaItem } from "./MangaItem";
 
 const InnerFlexBox = styled.div`
   width: 80%;
@@ -19,7 +19,6 @@ const MangaUl = styled.ul`
   gap: 1rem;
   flex-direction: column;
 `;
-
 
 export const MangaDashboard = () => {
   const { data } = useGetMangaListQuery();

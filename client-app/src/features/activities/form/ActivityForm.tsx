@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { v4 as uuid } from "uuid";
 import { DayPicker } from "react-day-picker";

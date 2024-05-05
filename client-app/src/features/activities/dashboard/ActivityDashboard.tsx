@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Activity } from "../../../app/models/activity";
-import {ActivityForm} from "../form/ActivityForm";
+import { ActivityForm } from "../form/ActivityForm";
 import { ActivityList } from "./ActivityList";
-import { ActivityDetails, DetailsBlock } from "../details/ActivityDetails";
 
 export interface Props {
   activities: Activity[];
@@ -35,22 +34,22 @@ const TopActivity = styled.div`
 
 const TopWrap = styled.div`
   gap: 2%;
-display: flex;  padding-top: 2rem;
-`
+  display: flex;
+  padding-top: 2rem;
+`;
 export const ActivityDashboard = () => {
-
   const [activities, setActivities] = useState<Activity[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<
-      Activity | undefined
+    Activity | undefined
   >(undefined);
 
   const apiUrl = `${process.env.REACT_APP_API_URL}/Activities`;
   useEffect(() => {
     fetch(apiUrl)
-        .then((res) => res.json())
-        .then((response) => {
-          setActivities(response);
-        });
+      .then((res) => res.json())
+      .then((response) => {
+        setActivities(response);
+      });
   }, []);
   return (
     <div>
@@ -64,9 +63,7 @@ export const ActivityDashboard = () => {
             <div>{activities[0] && activities[0].title}</div>
           </TopActivity>
           <ActivityForm />
-
         </TopWrap>
-
 
         {/*<RightWrapper>*/}
         {/*  {activities[0] && <ActivityDetails activity={activities[0]} />}*/}

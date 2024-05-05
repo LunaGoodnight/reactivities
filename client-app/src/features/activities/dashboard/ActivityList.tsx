@@ -8,6 +8,7 @@ export const ActivityUl = styled.ul`
   flex-wrap: wrap;
   margin-top: 1rem;
   justify-content: center;
+
   li {
     width: 32.4%;
     font-size: 1.2rem;

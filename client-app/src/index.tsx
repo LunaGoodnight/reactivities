@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ActivityDashboard } from "./features/activities/dashboard/ActivityDashboard";
-import {AnythingDashboard} from "./features/anything/AnythingDashboard";
+import { AnythingDashboard } from "./features/anything/AnythingDashboard";
 import { MangaDashboard } from "./features/manga/MangaDashboard";
 import { Provider } from "react-redux";
 import GlobalStyle from "./globalStyle";
@@ -10,6 +10,7 @@ import App from "./app/layout/App";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { store } from "./store";
+import { LoginForm } from "./features/users/LoginForm";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <ActivityDashboard />,
+      },
+      {
+        path: "/login",
+        element: <LoginForm />,
       },
       {
         path: "/anything",

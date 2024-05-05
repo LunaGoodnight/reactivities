@@ -1,8 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
-import {v4 as uuid} from "uuid";
-import {useAddMangaMutation} from "../../../services/manga";
-
+import { v4 as uuid } from "uuid";
+import { useAddMangaMutation } from "../../../services/manga";
 
 export const MaterialInput = styled.input`
   width: 100%;
@@ -29,43 +28,43 @@ const Button = styled.button`
   background: #26a69a;
   color: #fff;
   cursor: pointer;
-  &:hover{
+
+  &:hover {
     background: #229e93;
   }
-`
+`;
 
 export const MangaForm = () => {
   const [domain, setDomain] = useState("");
   const [title, setTitle] = useState("");
   const [addManga] = useAddMangaMutation();
   const handleSubmit = () => {
-      const data = {
-          id: uuid(),
-          title,
-          domain,
-      };
+    const data = {
+      id: uuid(),
+      title,
+      domain,
+    };
 
-      addManga(data);
-  }
+    addManga(data);
+  };
   return (
+    <>
+      <MaterialInput
+        placeholder="title"
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <MaterialInput
+        placeholder="domain"
+        type="text"
+        value={domain}
+        onChange={(e) => setDomain(e.target.value)}
+      />
 
-          <>
-              <MaterialInput
-                  placeholder='title'
-                  type="text"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-              />
-              <MaterialInput
-                  placeholder='domain'
-                  type="text"
-                  value={domain}
-                  onChange={(e) => setDomain(e.target.value)}
-              />
-
-              <Button type='button' onClick={handleSubmit}>Submit</Button>
-          </>
-
-
+      <Button type="button" onClick={handleSubmit}>
+        Submit
+      </Button>
+    </>
   );
 };

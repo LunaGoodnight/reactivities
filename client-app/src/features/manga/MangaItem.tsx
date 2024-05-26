@@ -5,6 +5,8 @@ import {
   useEditMangaMutation,
 } from "../../services/manga";
 import { MaterialInput } from "./form/MangaForm";
+import { Loader } from "semantic-ui-react";
+import {LoadingSpinner} from "./LoadingSpinner";
 
 const MangaRow = styled.li`
   display: flex;
@@ -72,6 +74,7 @@ const SubmitButton = styled.button`
 `;
 export const MangaItem = ({ title, domain, id }: IProps) => {
   const [isEdit, setIsEdit] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [newDomain, setNewDomain] = useState(domain);
   const [newTitle, setNewTitle] = useState(title);
 
@@ -82,6 +85,7 @@ export const MangaItem = ({ title, domain, id }: IProps) => {
     DeleteManga(id);
   };
   const handleEdit = () => {
+    setIsLoading(true);
     const data = {
       id,
       title: newTitle,
@@ -90,22 +94,15 @@ export const MangaItem = ({ title, domain, id }: IProps) => {
 
     EditManga(data).then(() => {
       setIsEdit(false);
+      setIsLoading(false);
     });
   };
   return (
     <MangaRow>
-      <Top>
-        <LeftLink>
-          <a href={domain} target="_blank">
-            {title}
-          </a>
-        </LeftLink>
 
-        <Edit type="button" onClick={() => setIsEdit((prev) => !prev)}>
-          Edit
-        </Edit>
-      </Top>
-      {isEdit ? (
+      {isLoading ? (
+          <LoadingSpinner />
+      ) : isEdit ? (
         <EditForm>
           <div>
             <MaterialInput
@@ -130,7 +127,19 @@ export const MangaItem = ({ title, domain, id }: IProps) => {
             </SubmitButton>
           </ButtonRow>
         </EditForm>
-      ) : null}
+      ) : (
+        <Top>
+          <LeftLink>
+            <a href={domain} target="_blank">
+              {title}
+            </a>
+          </LeftLink>
+
+          <Edit type="button" onClick={() => setIsEdit((prev) => !prev)}>
+            Edit
+          </Edit>
+        </Top>
+      )}
     </MangaRow>
   );
 };

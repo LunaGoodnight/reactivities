@@ -21,6 +21,14 @@ namespace Persistence
                     await userManager.CreateAsync(user, "Pa$$w0rd");
                 }
             }
+            else
+            {
+                Console.WriteLine("Users already exist in the database:");
+                foreach (var user in userManager.Users)
+                {
+                    Console.WriteLine($"User: {user.DisplayName} ({user.UserName}, {user.Email})");
+                }
+            }
 
             if (!context.Activities.Any())
             {
@@ -139,7 +147,7 @@ namespace Persistence
                 await context.Items.AddRangeAsync(itemList);
             }
 
-          
+
             await context.SaveChangesAsync();
         }
     }

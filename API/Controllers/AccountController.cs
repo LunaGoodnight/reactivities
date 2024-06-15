@@ -50,11 +50,8 @@ public class AccountController : ControllerBase
     {
         if (await _userManager.Users.AnyAsync(x => x.UserName == registerDto.Username))
         {
-
             return BadRequest("Username is already taken");
-
         }
-
         var user = new AppUser
         {
             DisplayName = registerDto.DisplayName,

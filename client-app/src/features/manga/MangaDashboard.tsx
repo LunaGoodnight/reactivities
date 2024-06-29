@@ -16,7 +16,6 @@ const InnerFlexBox = styled.div`
 
 const MangaUl = styled.ul`
   display: flex;
-  gap: 1rem;
   flex-direction: column;
 `;
 

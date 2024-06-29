@@ -45,7 +45,10 @@ export const MangaForm = () => {
       domain,
     };
 
-    addManga(data);
+    addManga(data).then(()=> {
+        setTitle('')
+        setDomain('')
+    });
   };
   return (
     <>

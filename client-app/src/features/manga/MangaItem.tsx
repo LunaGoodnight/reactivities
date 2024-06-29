@@ -5,7 +5,6 @@ import {
   useEditMangaMutation,
 } from "../../services/manga";
 import { MaterialInput } from "./form/MangaForm";
-import { Loader } from "semantic-ui-react";
 import {LoadingSpinner} from "./LoadingSpinner";
 
 const MangaRow = styled.li`
@@ -13,6 +12,11 @@ const MangaRow = styled.li`
   width: 100%;
 
   flex-direction: column;
+  cursor: pointer;
+  padding: 8px;
+  &:hover {
+    background: #dadada;
+  }
 `;
 const Title = styled.div`
   width: 80%;

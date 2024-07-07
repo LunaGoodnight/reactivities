@@ -1,14 +1,19 @@
-﻿using AutoMapper;
+﻿
+using Application.DTOs;
+using AutoMapper;
 using Domain;
 
-namespace Application.Core;
 
-public class MappingProfiles : Profile
+namespace Application.Core
 {
-    public MappingProfiles()
+    public class MappingProfiles : Profile
     {
-        CreateMap<Activity, Activity>();
-        CreateMap<Link, Link>();
-        CreateMap<Item, Item>();
+        public MappingProfiles()
+        {
+            CreateMap<Activity, Activity>();
+            CreateMap<Link, Link>();
+            CreateMap<CreateItemDto, Item>(); // Mapping for CreateItemDto to Item
+            CreateMap<EditItemDto, Item>();   // Mapping for EditItemDto to Item
+        }
     }
 }

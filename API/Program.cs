@@ -14,7 +14,6 @@ using Persistence;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
@@ -38,7 +37,11 @@ app.UseAuthorization();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
+// Map controllers
 app.MapControllers();
+
+// Add a fallback endpoint to serve the index.html file
+app.MapFallbackToFile("index.html");
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
@@ -54,7 +57,7 @@ try
 catch (Exception e)
 {
     var logger = services.GetRequiredService<ILogger<Program>>();
-    logger.LogError(e, "An error occured during migration");
+    logger.LogError(e, "An error occurred during migration");
 }
 
 await app.RunAsync();

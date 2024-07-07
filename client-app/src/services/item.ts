@@ -1,4 +1,3 @@
-// Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ItemInterface } from "../app/models/activity";
 
@@ -12,11 +11,11 @@ export const itemApi = createApi({
       query: () => `items`,
       providesTags: ["Item"],
     }),
-    addItem: builder.mutation<ItemInterface, Partial<ItemInterface>>({
-      query: (body) => ({
+    addItem: builder.mutation<ItemInterface, FormData>({
+      query: (formData) => ({
         url: `items`,
         method: "POST",
-        body,
+        body: formData,
       }),
       invalidatesTags: ["Item"],
     }),
@@ -31,7 +30,6 @@ export const itemApi = createApi({
       }),
       invalidatesTags: ["Item"],
     }),
-
     deleteItem: builder.mutation({
       query: (id) => ({
         url: `items/${id}`,

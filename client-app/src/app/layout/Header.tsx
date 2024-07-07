@@ -37,7 +37,6 @@ export const Header = () => {
       <InnerFlexBox>
         <LogoStyle>
           <Link to={`/`}>
-            {" "}
             <img src={Logo} alt="logo" />
           </Link>
         </LogoStyle>

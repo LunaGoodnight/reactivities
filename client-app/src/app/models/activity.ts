@@ -18,4 +18,5 @@ export interface ItemInterface {
   id: string;
   name: string;
   description: string;
+  imageUrl: string | null;
 }

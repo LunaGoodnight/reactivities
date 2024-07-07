@@ -19,14 +19,11 @@ export const itemApi = createApi({
       }),
       invalidatesTags: ["Item"],
     }),
-    editItem: builder.mutation({
-      query: (body) => ({
-        url: `items/${body.id}`,
+    editItem: builder.mutation<ItemInterface, FormData>({
+      query: (formData) => ({
+        url: `items/${formData.get("id")}`,
         method: "PUT",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-        body: body,
+        body: formData,
       }),
       invalidatesTags: ["Item"],
     }),

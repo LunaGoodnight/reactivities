@@ -21,8 +21,9 @@ const Button = styled.button`
 const CloseButton = styled.div`
     color: #8a8a8a;
     position: absolute;
-    right: 1rem;
-    top: 1rem;
+    right: 2rem;
+    top: 2rem;
+    font-size: 20px;
 `;
 
 const InnerFlexBox = styled.div`
@@ -125,9 +126,9 @@ export const AnythingDashboard = () => {
             </div>
             <div>
                 {data
-                    ? data.map(({ id, name, description }) => {
+                    ? data.map(({ id, name, description, imageUrl }) => {
                         return (
-                            <Item key={id} id={id} name={name} description={description} />
+                            <Item key={id} id={id} name={name} description={description} imageUrl={imageUrl} />
                         );
                     })
                     : null}

@@ -49,8 +49,20 @@ namespace API.Controllers
             if (item == null) return NotFound();
 
             _mapper.Map(editItemDto, item);
+
             if (editItemDto.Image != null && editItemDto.Image.Length > 0)
             {
+                // Delete the existing image file if a new one is being uploaded
+                if (!string.IsNullOrEmpty(item.ImageUrl))
+                {
+                    var existingFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", item.ImageUrl.TrimStart('/'));
+                    if (System.IO.File.Exists(existingFilePath))
+                    {
+                        System.IO.File.Delete(existingFilePath);
+                    }
+                }
+
+                // Save the new image
                 var imageUrl = await SaveImageAsync(editItemDto.Image);
                 item.ImageUrl = imageUrl;
             }

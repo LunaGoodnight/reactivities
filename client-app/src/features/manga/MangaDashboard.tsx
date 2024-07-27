@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useGetMangaListQuery } from "../../services/manga";
 import { MangaForm } from "./form/MangaForm";
 import { MangaItem } from "./MangaItem";
+import { useMemo } from "react";
 
 const InnerFlexBox = styled.div`
   width: 80%;
@@ -22,18 +23,27 @@ const MangaUl = styled.ul`
 export const MangaDashboard = () => {
   const { data } = useGetMangaListQuery();
 
+  const mangaList = useMemo(() => {
+    if (data) {
+      return [...data].sort((a, b) => {
+        if (a.title && b.title) {
+          return a.title.localeCompare(b.title);
+        }
+        return 0; // Fallback for undefined titles
+      });
+    } else {
+      return [];
+    }
+  }, [data]);
+
   return (
-    <InnerFlexBox>
-      <MangaForm />
-      <MangaUl>
-        {data
-          ? data.map(({ id, domain, title }) => {
-              return (
-                <MangaItem key={id} title={title} domain={domain} id={id} />
-              );
-            })
-          : null}
-      </MangaUl>
-    </InnerFlexBox>
+      <InnerFlexBox>
+        <MangaForm />
+        <MangaUl>
+          {mangaList.map(({ id, domain, title }) => (
+              <MangaItem key={id} title={title} domain={domain} id={id} />
+          ))}
+        </MangaUl>
+      </InnerFlexBox>
   );
 };
